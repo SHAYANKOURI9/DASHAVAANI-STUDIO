@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" data-composition-variables="[
+    {&quot;id&quot;:&quot;category&quot;,&quot;type&quot;:&quot;string&quot;,&quot;label&quot;:&quot;Category&quot;,&quot;default&quot;:&quot;ECONOMY&quot;,&quot;maxLength&quot;:24},
+    {&quot;id&quot;:&quot;headline&quot;,&quot;type&quot;:&quot;string&quot;,&quot;label&quot;:&quot;Headline&quot;,&quot;default&quot;:&quot;RBI keeps the repo rate unchanged&quot;,&quot;maxLength&quot;:90},
+    {&quot;id&quot;:&quot;badge&quot;,&quot;type&quot;:&quot;string&quot;,&quot;label&quot;:&quot;Language badge&quot;,&quot;default&quot;:&quot;English&quot;},
+    {&quot;id&quot;:&quot;dateline&quot;,&quot;type&quot;:&quot;string&quot;,&quot;label&quot;:&quot;Dateline&quot;,&quot;default&quot;:&quot;MUMBAI  ■  08 OCT 2026  ■  10:00 IST&quot;},
+    {&quot;id&quot;:&quot;ticker&quot;,&quot;type&quot;:&quot;string&quot;,&quot;label&quot;:&quot;Ticker&quot;,&quot;default&quot;:&quot;MARKETS OPEN THE WEEK  ■  MONSOON UPDATE FOR SOUTHERN STATES  ■  STATE BOARD EXAM SCHEDULE&quot;}
+  ]">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <title>VT-05 Shorts &amp; Reels</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Anek Latin"; src: url("assets/fonts/AnekLatin.ttf") format("truetype"); font-weight: 100 800; font-stretch: 75% 125%; }
+      @font-face { font-family: "Noto Sans Telugu"; src: url("assets/fonts/NotoSansTelugu.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62.5% 100%; }
+      @font-face { font-family: "Noto Sans Devanagari"; src: url("assets/fonts/NotoSansDevanagari.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62.5% 100%; }
+      @font-face { font-family: "Noto Sans Tamil"; src: url("assets/fonts/NotoSansTamil.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Noto Sans Kannada"; src: url("assets/fonts/NotoSansKannada.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Noto Sans Malayalam"; src: url("assets/fonts/NotoSansMalayalam.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Noto Sans Bengali"; src: url("assets/fonts/NotoSansBengali.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Noto Sans Gujarati"; src: url("assets/fonts/NotoSansGujarati.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Noto Sans Oriya"; src: url("assets/fonts/NotoSansOriya.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Anek Telugu"; src: url("assets/fonts/AnekTelugu.ttf") format("truetype"); font-weight: 100 800; font-stretch: 75% 125%; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #16204a; }
+      #root {
+        position: relative; width: 100%; height: 100%; overflow: hidden;
+        background: #16204a; color: #f3ede2;
+        font-family: "Anek Latin", "Noto Sans Telugu", "Noto Sans Devanagari", "Noto Sans Tamil", "Noto Sans Kannada", "Noto Sans Malayalam", "Noto Sans Bengali", "Noto Sans Gujarati", "Noto Sans Oriya", sans-serif;
+      }
+      .caps { font-weight: 600; font-stretch: 75%; letter-spacing: 0.16em; }
+      /* Tracking breaks Indic conjuncts; the composer sets <html lang> per edition. */
+      html:not(:lang(en)) .caps, html:not(:lang(en)) #category { letter-spacing: 0; }
+
+      /* Text stays in the top half: Shorts and Reels cover the bottom fifth and the right edge with their own buttons and captions. */
+      #logo { position: absolute; left: 64px; top: 92px; display: flex; align-items: center; gap: 15px; }
+      #logo .dash { font-size: 56px; line-height: 0.85; font-weight: 800; font-stretch: 125%; }
+      #logo .bar { width: 8px; height: 50px; background: #f0a202; }
+      #logo .vani { font-size: 32px; line-height: 0.85; font-weight: 500; font-stretch: 75%; letter-spacing: 0.22em; }
+      #badge { position: absolute; right: 140px; top: 88px; background: #f0a202; color: #16204a; padding: 9px 18px; font-size: 28px; font-weight: 700; }
+      #rule { position: absolute; left: 64px; right: 64px; top: 176px; display: flex; flex-direction: column; gap: 6px; }
+      #rule div:first-child { height: 4px; background: #f3ede2; }
+      #rule div:last-child { height: 1px; background: #f3ede2; }
+      #dateline { position: absolute; left: 64px; top: 206px; font-size: 26px; color: #d9d3c6; }
+
+      #story { position: absolute; left: 64px; right: 140px; top: 270px; height: 420px; display: flex; flex-direction: column; justify-content: center; gap: 26px; }
+      #category { align-self: flex-start; background: #f0a202; color: #16204a; padding: 10px 22px; font-size: 28px; font-weight: 700; font-stretch: 75%; letter-spacing: 0.2em; }
+      #headline { font-size: 88px; line-height: 1.04; font-weight: 700; font-stretch: 87%; letter-spacing: -0.01em; max-height: 300px; overflow: hidden; }
+
+      #ticker { position: absolute; left: 0; right: 0; top: 724px; height: 68px; display: flex; background: #f3ede2; color: #16204a; overflow: hidden; z-index: 2; }
+      #ticker .tag { flex-shrink: 0; z-index: 1; display: flex; align-items: center; padding: 0 22px; background: #16204a; color: #f0a202; border: 3px solid #f3ede2; font-size: 28px; font-weight: 800; font-stretch: 125%; }
+      #ticker-track, .ticker-copy { display: flex; align-items: center; white-space: nowrap; padding-left: 28px; font-size: 30px; font-weight: 600; font-stretch: 75%; letter-spacing: 0.06em; }
+      #ticker-track::after, .ticker-copy::after { content: "■"; margin-left: 30px; }
+
+      /* presenter fills the lower part; HeyGen films 4:5 on the same blue */
+      #panel { position: absolute; left: 0; right: 0; top: 792px; bottom: 0; background: #222e63; overflow: hidden; }
+      #panel .cols { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(6, 1fr); }
+      #panel .cols div { border-left: 1px solid rgba(243, 237, 226, 0.09); }
+      #avatar { position: absolute; left: 0; top: 0; width: 1080px; height: 1128px; object-fit: cover; object-position: center top; }
+      #disclosure { position: absolute; left: 64px; top: 828px; display: flex; z-index: 2; }
+      #disclosure .ai { background: #f3ede2; color: #16204a; padding: 9px 15px; font-size: 22px; font-weight: 800; letter-spacing: 0.14em; }
+      #disclosure .v { background: #16204a; border: 2px solid #f3ede2; border-left: none; padding: 8px 15px; font-size: 22px; letter-spacing: 0.12em; }
+      /* Telugu and Hindi stack vowel signs above and below the line: give them room so nothing is clipped */
+      html:not(:lang(en)) #headline, html:not(:lang(en)) .point p, html:not(:lang(en)) #standfirst { line-height: 1.3; padding-bottom: 0.06em; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="10" data-width="1080" data-height="1920">
+      <div id="panel">
+        <div class="cols"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <video id="avatar" data-start="0" data-track-index="1" src="assets/avatar-placeholder.mp4" muted playsinline></video>
+      </div>
+      <audio id="voice" data-start="0" data-track-index="10" src="assets/voice-placeholder.m4a" data-volume="1"></audio>
+
+      <div id="logo"><div class="dash">DASHA</div><div class="bar"></div><div class="vani">VANI</div></div>
+      <div id="badge" data-var-text="badge">English</div>
+      <div id="rule"><div></div><div></div></div>
+      <div id="dateline" class="caps" data-var-text="dateline">MUMBAI  ■  08 OCT 2026  ■  10:00 IST</div>
+
+      <div id="story">
+        <div id="category" data-var-text="category">ECONOMY</div>
+        <h1 id="headline" data-var-text="headline">RBI keeps the repo rate unchanged</h1>
+      </div>
+
+      <div id="ticker">
+        <div class="tag">LATEST</div>
+        <div id="ticker-track" data-var-text="ticker">MARKETS OPEN THE WEEK  ■  MONSOON UPDATE FOR SOUTHERN STATES  ■  STATE BOARD EXAM SCHEDULE</div>
+      </div>
+
+      <div id="disclosure">
+        <div class="ai">AI PRESENTER</div>
+        <div class="v caps">VERIFIED BY DASHAVANI DESK</div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      document.fonts.ready.then(() => {
+        // Shrink long headlines (Telugu runs longer) until they fit the 300px box.
+        const h = document.getElementById("headline");
+        for (let size = 88; h.scrollHeight > 300 && size > 52; size -= 4) h.style.fontSize = size + "px";
+
+        const total = Number(document.getElementById("root").dataset.duration);
+        const track = document.getElementById("ticker-track");
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#category", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 0.2);
+        tl.fromTo("#headline", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.35);
+        tl.fromTo("#disclosure", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 1.0);
+        // Ticker loops without a seam: copies of the line follow it on one belt that moves at a steady speed for the whole story.
+        const belt = document.createElement("div");
+        belt.style.display = "flex";
+        track.before(belt);
+        belt.append(track);
+        const w = track.offsetWidth, speed = 120;
+        for (let i = 0; i < Math.ceil(belt.parentElement.clientWidth / w) + 1; i++) {
+          const copy = track.cloneNode(true);
+          copy.removeAttribute("id"); copy.removeAttribute("data-var-text"); copy.removeAttribute("data-hf-id");
+          copy.className = "ticker-copy";
+          belt.append(copy);
+        }
+        tl.fromTo(belt, { x: 0 }, { x: -w, duration: w / speed, ease: "none", repeat: Math.ceil((total * speed) / w) }, 0);
+        window.__timelines["main"] = tl;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+node_modules/
+.next/
+data/
+*.db
+*.db-journal
+.env
+.env.local
+.DS_Store
+renders/
+.hyperframes/
+.thumbnails/
+snapshots/
+
+# AI tool files and session notes: kept on this Mac, not in the repo
+.agents/
+.claude/
+skills-lock.json
+.waveform-cache/
+story.md
+cloude.md
+
+# Local only
+.git-backup/
+Asset/
+dist/

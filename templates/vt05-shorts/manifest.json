@@ -1,0 +1,11 @@
+{
+  "id": "vt05-shorts",
+  "name": "VT-05 Shorts & Reels",
+  "purpose": "Vertical single story with AI presenter, for YouTube Shorts and Instagram Reels",
+  "aspect": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "stories": { "min": 1, "max": 1 },
+  "languages": ["en", "te"],
+  "variables": ["category", "headline", "badge", "dateline", "ticker"]
+}

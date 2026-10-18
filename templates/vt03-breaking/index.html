@@ -1,0 +1,134 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"headline","type":"string","label":"Headline","default":"Heavy rain alert for coastal districts","maxLength":90},
+    {"id":"standfirst","type":"string","label":"Update line","default":"Dashavani will update this story as officials confirm more information","maxLength":120},
+    {"id":"badge","type":"string","label":"Language badge","default":"English"},
+    {"id":"dateline","type":"string","label":"Dateline","default":"08 OCT 2026"},
+    {"id":"clock","type":"string","label":"Time (IST)","default":"07:42"},
+    {"id":"ticker","type":"string","label":"Ticker","default":"FISHERMEN ADVISED NOT TO VENTURE OUT  ■  DISTRICT CONTROL ROOMS ACTIVATED  ■  MORE UPDATES ON DASHAVANI"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>VT-03 Breaking</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Anek Latin"; src: url("assets/fonts/AnekLatin.ttf") format("truetype"); font-weight: 100 800; font-stretch: 75% 125%; }
+      @font-face { font-family: "Noto Sans Telugu"; src: url("assets/fonts/NotoSansTelugu.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62.5% 100%; }
+      @font-face { font-family: "Noto Sans Devanagari"; src: url("assets/fonts/NotoSansDevanagari.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62.5% 100%; }
+      @font-face { font-family: "Noto Sans Tamil"; src: url("assets/fonts/NotoSansTamil.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Noto Sans Kannada"; src: url("assets/fonts/NotoSansKannada.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Noto Sans Malayalam"; src: url("assets/fonts/NotoSansMalayalam.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Noto Sans Bengali"; src: url("assets/fonts/NotoSansBengali.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Noto Sans Gujarati"; src: url("assets/fonts/NotoSansGujarati.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Noto Sans Oriya"; src: url("assets/fonts/NotoSansOriya.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Anek Telugu"; src: url("assets/fonts/AnekTelugu.ttf") format("truetype"); font-weight: 100 800; font-stretch: 75% 125%; }
+      @font-face { font-family: "Tiro Telugu"; src: url("assets/fonts/TiroTelugu-Italic.ttf") format("truetype"); font-style: italic; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #16204a; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #16204a; color: #f3ede2; font-family: "Anek Latin", "Noto Sans Telugu", "Noto Sans Devanagari", "Noto Sans Tamil", "Noto Sans Kannada", "Noto Sans Malayalam", "Noto Sans Bengali", "Noto Sans Gujarati", "Noto Sans Oriya", sans-serif; }
+      .caps { font-weight: 600; font-stretch: 75%; letter-spacing: 0.16em; }
+      /* Tracking breaks Indic conjuncts; the composer sets <html lang> per edition. */
+      html:not(:lang(en)) .caps { letter-spacing: 0; }
+
+      #band { position: absolute; left: 0; top: 0; width: 1920px; height: 300px; background: #c9301a; transform-origin: left center; }
+      #band-inner { position: absolute; left: 60px; right: 60px; top: 34px; bottom: 30px; display: flex; justify-content: space-between; align-items: flex-end; color: #fff; }
+      #logo { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+      #logo .dash { font-size: 39px; line-height: 0.85; font-weight: 800; font-stretch: 125%; }
+      #logo .bar { width: 6px; height: 33px; background: #fff; }
+      #logo .vani { font-size: 24px; line-height: 0.85; font-weight: 500; font-stretch: 75%; letter-spacing: 0.22em; }
+      #word { font-size: 174px; line-height: 0.86; font-weight: 800; font-stretch: 125%; letter-spacing: -0.02em; }
+      #clock-box { text-align: right; }
+      #clock { font-size: 96px; line-height: 1; font-weight: 700; font-stretch: 75%; }
+      #dateline { font-size: 24px; margin-top: 10px; }
+      #seam { position: absolute; left: 0; right: 0; top: 300px; height: 9px; background: #16204a; border-bottom: 3px solid #c9301a; }
+
+      #story { position: absolute; left: 60px; top: 330px; width: 1170px; height: 600px; display: flex; flex-direction: column; justify-content: center; gap: 30px; }
+      #status { display: flex; align-items: center; gap: 15px; font-size: 22px; color: #ffb8a8; }
+      #pulse { width: 16px; height: 16px; background: #c9301a; }
+      #headline { font-size: 100px; line-height: 1.1; font-weight: 700; font-stretch: 87%; letter-spacing: -0.01em; max-height: 340px; overflow: hidden; padding-bottom: 6px; }
+      #standfirst { font-family: "Tiro Telugu", "Noto Sans Devanagari", "Noto Sans Tamil", "Noto Sans Kannada", "Noto Sans Malayalam", "Noto Sans Bengali", "Noto Sans Gujarati", "Noto Sans Oriya", serif; font-style: italic; font-size: 40px; line-height: 1.25; color: #d9d3c6; }
+
+      #panel { position: absolute; right: 0; top: 312px; width: 600px; height: 699px; background: #222e63; overflow: hidden; }
+      #avatar { position: absolute; left: 0; bottom: 0; width: 600px; height: 699px; object-fit: cover; object-position: center bottom; }
+      #disclosure { position: absolute; left: 1344px; bottom: 93px; display: flex; }
+      #disclosure .ai { background: #f3ede2; color: #16204a; padding: 9px 15px; font-size: 18px; font-weight: 800; letter-spacing: 0.14em; }
+      #disclosure .lang { background: #16204a; border: 2px solid #f3ede2; border-left: none; padding: 8px 15px; font-size: 18px; font-weight: 700; }
+
+      #ticker { position: absolute; left: 0; right: 0; bottom: 0; height: 69px; display: flex; background: #f3ede2; color: #16204a; overflow: hidden; }
+      #ticker .tag { flex-shrink: 0; z-index: 1; display: flex; align-items: center; padding: 0 24px; background: #c9301a; color: #fff; font-size: 26px; font-weight: 800; font-stretch: 125%; letter-spacing: 0.06em; }
+      #ticker-track, .ticker-copy { display: flex; align-items: center; white-space: nowrap; padding-left: 30px; font-size: 28px; font-weight: 600; font-stretch: 75%; letter-spacing: 0.06em; }
+      #ticker-track::after, .ticker-copy::after { content: "■"; margin-left: 30px; }
+      /* Telugu and Hindi stack vowel signs above and below the line: give them room so nothing is clipped */
+      html:not(:lang(en)) #headline, html:not(:lang(en)) .point p, html:not(:lang(en)) #standfirst { line-height: 1.3; padding-bottom: 0.06em; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="10" data-width="1920" data-height="1080">
+      <div id="band">
+        <div id="band-inner">
+          <div>
+            <div id="logo"><div class="dash">DASHA</div><div class="bar"></div><div class="vani">VANI</div></div>
+            <div id="word">BREAKING</div>
+          </div>
+          <div id="clock-box">
+            <div id="clock" data-var-text="clock">07:42</div>
+            <div id="dateline" class="caps"><span>IST · </span><span data-var-text="dateline">08 OCT 2026</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="seam"></div>
+
+      <div id="story">
+        <div id="status" class="caps"><div id="pulse"></div><span>DEVELOPING STORY · DETAILS BEING VERIFIED</span></div>
+        <h1 id="headline" data-var-text="headline">Heavy rain alert for coastal districts</h1>
+        <p id="standfirst" data-var-text="standfirst">Dashavani will update this story as officials confirm more information</p>
+      </div>
+
+      <div id="panel">
+        <video id="avatar" data-start="0" data-track-index="1" src="assets/avatar-placeholder.mp4" muted playsinline></video>
+      </div>
+      <audio id="voice" data-start="0" data-track-index="10" src="assets/voice-placeholder.m4a" data-volume="1"></audio>
+      <div id="disclosure"><div class="ai">AI PRESENTER</div><div class="lang" data-var-text="badge">English</div></div>
+
+      <div id="ticker">
+        <div class="tag">LATEST</div>
+        <div id="ticker-track" data-var-text="ticker">FISHERMEN ADVISED NOT TO VENTURE OUT  ■  DISTRICT CONTROL ROOMS ACTIVATED  ■  MORE UPDATES ON DASHAVANI</div>
+      </div>
+    </div>
+    <script>
+      document.fonts.ready.then(() => {
+        const h = document.getElementById("headline");
+        for (let size = 100; h.scrollHeight > 340 && size > 56; size -= 4) h.style.fontSize = size + "px";
+
+        const total = Number(document.getElementById("root").dataset.duration);
+        const track = document.getElementById("ticker-track");
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#band", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "power4.out" }, 0);
+        tl.fromTo("#word", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 0.25);
+        tl.fromTo("#clock-box", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.5);
+        tl.fromTo("#headline", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.7);
+        tl.fromTo("#standfirst", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 1.1);
+        tl.fromTo("#pulse", { opacity: 1 }, { opacity: 0.2, duration: 0.5, repeat: Math.max(1, Math.floor(total) * 2 - 1), yoyo: true, ease: "none" }, 0.5);
+        // Ticker loops without a seam: copies of the line follow it on one belt that moves at a steady speed for the whole story.
+        const belt = document.createElement("div");
+        belt.style.display = "flex";
+        track.before(belt);
+        belt.append(track);
+        const w = track.offsetWidth, speed = 120;
+        for (let i = 0; i < Math.ceil(belt.parentElement.clientWidth / w) + 1; i++) {
+          const copy = track.cloneNode(true);
+          copy.removeAttribute("id"); copy.removeAttribute("data-var-text"); copy.removeAttribute("data-hf-id");
+          copy.className = "ticker-copy";
+          belt.append(copy);
+        }
+        tl.fromTo(belt, { x: 0 }, { x: -w, duration: w / speed, ease: "none", repeat: Math.ceil((total * speed) / w) }, 0);
+        window.__timelines["main"] = tl;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashavani Studio: verified news, made into video in ten languages</title>
+<meta name="description" content="An AI newsroom studio that turns a verified news release into a finished broadcast video in ten Indian languages, with an editor approving every step.">
+<meta property="og:title" content="Dashavani Studio">
+<meta property="og:description" content="One verified story, ten languages. AI script, voice and presenter, with an editor approving every step.">
+<meta property="og:image" content="/media/hero.webp">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="/"><img src="/favicon.svg" alt="" width="28" height="28">Dashavani Studio</a>
+  <nav aria-label="Sections"><a href="#videos">Videos</a><a href="#how">How it works</a><a href="#inside">Inside</a></nav>
+  <a class="btn quiet" href="https://github.com/SHAYANKOURI9/DASHAVAANI-STUDIO">Code on GitHub</a>
+</header>
+
+<main>
+  <section class="hero">
+    <p class="tag"><span class="dot" aria-hidden="true"></span>English and nine Indian languages</p>
+    <h1>One verified story, ten languages.</h1>
+    <p class="lead">Dashavani Studio turns a verified news release into a finished broadcast video: an AI writes the script, records the voice and adds a presenter, and an editor approves every step.</p>
+    <div class="actions">
+      <a class="btn" href="#videos">Watch the videos</a>
+      <a class="btn quiet" id="studio-link" href="#" hidden>Open the live studio</a>
+      <a class="btn quiet" href="mailto:shayankouri@gmail.com?subject=Dashavani%20Studio%20demo">Ask for a live demo</a>
+    </div>
+    <img class="wide" src="/media/hero.webp" width="1600" height="469" alt="One Press Information Bureau story as finished Dashavani videos: landscape in English, Telugu, Tamil and Bengali, and Shorts &amp; Reels in Telugu, Kannada and English">
+  </section>
+
+  <section id="videos">
+    <h2>Made by the studio</h2>
+    <p class="sub">The same Press Information Bureau release, as the studio finished it. Press play for the voice.</p>
+    <div class="videos">
+      <figure><video controls preload="none" playsinline poster="/media/en-landscape.webp" src="/media/en-landscape.mp4"></video><figcaption>English, landscape 16:9</figcaption></figure>
+      <figure><video controls preload="none" playsinline poster="/media/te-landscape.webp" src="/media/te-landscape.mp4"></video><figcaption lang="te">తెలుగు <span lang="en">Telugu, landscape, with Telugu subtitles</span></figcaption></figure>
+      <figure class="tall"><video controls preload="none" playsinline poster="/media/te-shorts.webp" src="/media/te-shorts.mp4"></video><figcaption>Telugu, Shorts &amp; Reels 9:16</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="how">
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><b>Pick a verified story.</b> From the Press Information Bureau wire, or paste your own source.</li>
+      <li><b>Review the script.</b> The AI writes it and picks one of six templates. Every number must appear in the source, or it is flagged.</li>
+      <li><b>Hear the voice.</b> Recorded once per text, with word-timed subtitles in any of the ten languages.</li>
+      <li><b>Approve the draft.</b> Adjust the on-screen text and photo timing, or ask for a change in plain words.</li>
+      <li><b>Get the final.</b> With an AI presenter or voice only, in landscape and Shorts &amp; Reels, ready to download or upload to YouTube.</li>
+    </ol>
+  </section>
+
+  <section id="inside">
+    <h2>Inside the studio</h2>
+    <div class="shots">
+      <figure><img src="/media/live-script.webp" width="704" height="414" loading="lazy" alt="A story page while the script is written: the headline and narration appearing word by word"><figcaption>The script appears as the AI writes it.</figcaption></figure>
+      <figure><img src="/media/script-review.webp" width="630" height="1000" loading="lazy" alt="Script review: six video templates with the AI's pick marked, then the fields to check"><figcaption>Pick the template and check every field.</figcaption></figure>
+      <figure><img src="/media/adjust.webp" width="614" height="691" loading="lazy" alt="The Adjust the draft panel: category, headline, standfirst and ticker, and Remake the draft"><figcaption>Adjust the draft without a new voice.</figcaption></figure>
+      <figure><img src="/media/final.webp" width="630" height="818" loading="lazy" alt="A finished Telugu video and its download choices: version, quality and subtitle tracks"><figcaption>Download any version, size and subtitle tracks.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="built">
+    <h2>Built with</h2>
+    <p>Node 22, Vite, React and Tailwind; HyperFrames and ffmpeg for video; Gemini, ElevenLabs and HeyGen. Accounts with owner approval, per-account data separation, rate limits and a test suite that checks every route as every kind of user.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Dashavani Studio by Shayan Kouri · <a href="https://github.com/SHAYANKOURI9/DASHAVAANI-STUDIO">Source on GitHub</a> (MIT) · <a href="mailto:shayankouri@gmail.com">shayankouri@gmail.com</a></p>
+  <p class="small">Videos are AI-generated from public Press Information Bureau releases and labelled as such in every frame.</p>
+</footer>
+<script src="/config.js"></script>
+<script src="/page.js"></script>
+</body>
+</html>

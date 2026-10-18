@@ -1,0 +1,30 @@
+{
+  "name": "dashavani-studio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test",
+    "start": "npm run build && node --env-file-if-exists=.env.local server.mjs",
+    "mock": "npm run build && node --watch server.mjs --mock",
+    "build": "npm --prefix web run build",
+    "dev:web": "npm --prefix web run dev",
+    "i18n": "node --env-file-if-exists=.env.local i18n.mjs",
+    "youtube:auth": "node --env-file-if-exists=.env.local youtube-auth.mjs",
+    "postinstall": "npm --prefix web install --no-audit --no-fund",
+    "backup": "umask 077 && mkdir -p ../dashavani-backups && zip -qr ../dashavani-backups/dashavani-data-$(date +%Y-%m-%d-%H%M).zip data && ls -lh ../dashavani-backups | tail -1",
+    "online": "caffeinate -i cloudflared tunnel --no-autoupdate --url http://localhost:${PORT:-4000}"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "private": "true",
+  "type": "module",
+  "devDependencies": {
+    "hyperframes": "^0.8.142"
+  },
+  "dependencies": {
+    "nodemailer": "^7.0.13",
+    "zod": "^4.6.5"
+  }
+}

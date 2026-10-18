@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="robots" content="noindex">
+<title>Sign in to Dashavani Studio</title>
+<style>
+  @font-face { font-family: "Anek Latin"; src: url("/fonts/AnekLatin.ttf") format("truetype"); font-weight: 100 800; font-stretch: 75% 125%; font-display: swap; }
+  @font-face { font-family: "Noto Sans Telugu"; src: url("/fonts/NotoSansTelugu.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: "Noto Sans Devanagari"; src: url("/fonts/NotoSansDevanagari.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: "Noto Sans Tamil"; src: url("/fonts/NotoSansTamil.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: "Noto Sans Kannada"; src: url("/fonts/NotoSansKannada.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: "Noto Sans Malayalam"; src: url("/fonts/NotoSansMalayalam.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: "Noto Sans Bengali"; src: url("/fonts/NotoSansBengali.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: "Noto Sans Gujarati"; src: url("/fonts/NotoSansGujarati.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: "Noto Sans Oriya"; src: url("/fonts/NotoSansOriya.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+  :root {
+    --night: #0b0f1c; --cream: #f3ede2; --muted: rgba(243, 237, 226, .7); --gold: #f0a202; --error: #ff8a73;
+    --line: rgba(243, 237, 226, .16); --glass: rgba(22, 32, 74, .38); --ease: cubic-bezier(.2, .7, .2, 1); --gut: clamp(16px, 4vw, 56px);
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--night); }
+  body { margin: 0; min-height: 100vh; min-height: 100dvh; color: var(--cream); font-family: "Anek Latin", "Noto Sans Telugu", "Noto Sans Devanagari", "Noto Sans Tamil", "Noto Sans Kannada", "Noto Sans Malayalam", "Noto Sans Bengali", "Noto Sans Gujarati", "Noto Sans Oriya", system-ui, sans-serif; font-size: 17px; line-height: 1.5; -webkit-font-smoothing: antialiased; display: grid; grid-template-rows: auto 1fr; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  /* the intro's film still, dimmed, behind everything */
+  .backdrop { position: fixed; inset: 0; z-index: -1; }
+  .backdrop img { width: 100%; height: 100%; object-fit: cover; }
+  .backdrop::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(11, 15, 28, .9), rgba(11, 15, 28, .55) 60%, rgba(11, 15, 28, .75)), linear-gradient(0deg, rgba(11, 15, 28, .8), transparent 45%); }
+
+  header { display: flex; justify-content: space-between; align-items: center; padding: 22px var(--gut); }
+  .mark { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-stretch: 125%; font-size: 19px; text-decoration: none; }
+  .mark svg { width: 20px; height: 20px; fill: var(--gold); }
+  .ui-lang { appearance: none; -webkit-appearance: none; font: inherit; font-size: 14px; font-weight: 600; color: var(--cream); min-height: 44px; padding: 0 30px 0 16px; border-radius: 999px; cursor: pointer;
+    background: rgba(11, 15, 28, .4) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23a4a19f' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 12px center / 10px 6px; border: 1px solid var(--line); }
+  .ui-lang option { color: var(--night); }
+
+  main { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, 440px); gap: clamp(32px, 6vw, 96px); align-items: center; padding: clamp(24px, 6vh, 72px) var(--gut) clamp(40px, 10vh, 120px); max-width: 1400px; width: 100%; margin: 0 auto; }
+  h1 { margin: 0; font-weight: 800; font-stretch: 125%; font-size: clamp(40px, 5.6vw, 84px); line-height: .98; letter-spacing: -.012em; text-wrap: balance; }
+  .lead { margin: 24px 0 0; max-width: 40ch; color: var(--muted); font-size: 18px; text-wrap: pretty; }
+
+  .card { padding: clamp(24px, 3vw, 36px); border-radius: 28px; background: var(--glass); border: 1px solid var(--line); backdrop-filter: blur(22px) saturate(1.2); -webkit-backdrop-filter: blur(22px) saturate(1.2); box-shadow: inset 0 1px 0 rgba(243, 237, 226, .06), 0 40px 90px -40px rgba(0, 0, 0, .8); }
+  .card h2 { margin: 0 0 6px; font-size: 22px; font-weight: 700; font-stretch: 112%; }
+  .card .hint { margin: 0 0 24px; color: var(--muted); font-size: 15px; }
+  label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 15px; }
+  .field { position: relative; }
+  input[type="email"] { padding-right: 16px; margin-bottom: 18px; }
+  input[type="password"], input[type="text"], input[type="email"] { width: 100%; font: inherit; color: var(--cream); background: rgba(11, 15, 28, .55); border: 1px solid var(--line); border-radius: 14px; padding: 14px 92px 14px 16px; min-height: 52px; transition: border-color .2s var(--ease); }
+  input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(240, 162, 2, .22); }
+  input[aria-invalid="true"] { border-color: var(--error); }
+  .show { position: absolute; right: 6px; top: 6px; bottom: 6px; padding: 0 14px; border-radius: 10px; border: 0; background: rgba(243, 237, 226, .08); color: var(--cream); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .show:hover { background: rgba(243, 237, 226, .14); }
+  .error { margin: 12px 0 0; color: var(--error); font-size: 15px; min-height: 1.5em; }
+  .submit { width: 100%; margin-top: 16px; min-height: 52px; border-radius: 999px; border: 0; background: var(--cream); color: var(--night); font: inherit; font-weight: 700; font-size: 16px; cursor: pointer; transition: background .2s var(--ease), transform .12s var(--ease); }
+  .submit:hover { background: #fff; }
+  .submit:active:not(:disabled) { transform: translateY(1px) scale(.99); }
+  .submit:disabled { opacity: .7; cursor: wait; }
+  .back { display: inline-block; margin-top: 20px; color: var(--muted); font-size: 15px; text-decoration: none; }
+  .back:hover { color: var(--cream); text-decoration: underline; }
+  .switch { margin: 20px 0 0; color: var(--muted); font-size: 15px; }
+  .switch a { color: var(--cream); font-weight: 600; }
+  .forgot-link { margin: 10px 0 0; text-align: right; font-size: 14px; }
+  .done { margin: 0; padding: 14px 16px; border-radius: 14px; background: rgba(240, 162, 2, .12); border: 1px solid rgba(240, 162, 2, .4); }
+  [hidden] { display: none !important; }
+
+  @media (max-width: 860px) { main { grid-template-columns: 1fr; align-content: start; } .lead { font-size: 17px; } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+<script type="module" src="/src/login.js"></script>
+</head>
+<body>
+<div class="backdrop" aria-hidden="true"><img src="/intro/poster.jpg" alt=""></div>
+<header>
+  <a class="mark" href="/intro" aria-label="Dashavani Studio intro"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg>Dashavani</a>
+  <select id="ui-lang" class="ui-lang" aria-label="Interface language" translate="no"></select>
+</header>
+<main>
+  <section>
+    <h1 data-mode="in">Sign in to use the studio</h1>
+    <h1 data-mode="up" hidden>Create your studio account</h1>
+    <h1 data-mode="forgot reset" hidden>Get back into your account</h1>
+    <p class="lead">Every part of the studio needs an account. The studio's owner approves new accounts, and each account makes videos with its own Gemini, ElevenLabs and HeyGen keys.</p>
+  </section>
+  <form class="card" id="signin" novalidate>
+    <h2 data-mode="in">Sign in</h2>
+    <h2 data-mode="up" hidden>Sign up</h2>
+    <h2 data-mode="forgot" hidden>Forgot your password?</h2>
+    <h2 data-mode="reset" hidden>Choose a new password</h2>
+    <p class="hint" data-mode="in">With the email and password you signed up with.</p>
+    <p class="hint" data-mode="up reset" hidden>Use at least 8 characters for the password.</p>
+    <p class="hint" data-mode="forgot" hidden>Enter your account's email and we'll send you a link to set a new password.</p>
+    <div data-mode="in up forgot">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required autofocus aria-describedby="err">
+    </div>
+    <div data-mode="in up reset">
+      <label for="pw" data-mode="in up">Password</label>
+      <label for="pw" data-mode="reset" hidden>New password</label>
+      <div class="field">
+        <input id="pw" name="password" type="password" autocomplete="current-password" required minlength="8" aria-describedby="err">
+        <button type="button" class="show" id="show" aria-pressed="false" aria-controls="pw">Show</button>
+      </div>
+    </div>
+    <p class="switch forgot-link" data-mode="in"><a href="/forgot" id="to-forgot">Forgot password?</a></p>
+    <p class="error" id="err" role="alert"></p>
+    <button type="submit" class="submit" id="go">Sign in</button>
+    <p class="switch" data-mode="in">New here? <a href="/signup" id="to-up">Create an account</a></p>
+    <p class="switch" data-mode="up forgot reset" hidden>Remembered it? <a href="/login" id="to-in">Sign in</a></p>
+    <a class="back" href="/intro">Back to the intro</a>
+  </form>
+  <div class="card" id="pending" hidden role="status">
+    <h2 tabindex="-1">Account created</h2>
+    <p class="done">The studio's owner needs to approve your account. Sign in once they have.</p>
+    <a class="back" href="/login">Back to sign in</a>
+  </div>
+  <div class="card" id="sent" hidden role="status">
+    <h2 tabindex="-1">Check your email</h2>
+    <p class="done">If an account uses that email, a link to set a new password is on its way. It works once, for one hour. Check your spam folder too.</p>
+    <a class="back" href="/login">Back to sign in</a>
+  </div>
+</main>
+</body>
+</html>
